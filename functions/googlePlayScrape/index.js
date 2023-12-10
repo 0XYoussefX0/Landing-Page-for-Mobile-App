@@ -1,14 +1,13 @@
 import gplay from "google-play-scraper"
-
-async function fetchPlayStoreReviews() {
-  let reviews
+import axios from "axios"
+export async function fetchPlayStoreReviews(req, res) {
   try {
     const response = await gplay.reviews({
       appId: "com.quranly.app",
       sort: gplay.sort.RECENT,
       num: 2000,
     })
-    reviews = response.data.map((review) => {
+    const reviews = response.data.map((review) => {
       const {
         id: reviewId,
         userName,
@@ -27,11 +26,15 @@ async function fetchPlayStoreReviews() {
         postedOn,
       }
     })
+
+    await axios.post("secondFunctionUrl", JSON.stringify(reviews), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    res.status(200).send("Reviews fetched and sent successfully!")
   } catch (error) {
     console.log("Error scraping reviews in Google Play:", error)
+    res.status(500).send("Internal Server Error")
   }
-  return reviews
 }
-
-const data = await fetchPlayStoreReviews()
-console.log(data)
