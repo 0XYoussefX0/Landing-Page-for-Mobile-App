@@ -1,3 +1,5 @@
-export function insertReviewDataIntoMySQL(req, res) {
+function insertReviewDataIntoMySQL(req, res) {
   res.status(200).send("Hello World !!")
 }
+
+module.exports = insertReviewDataIntoMySQL
