@@ -36,7 +36,7 @@ export async function fetchPlayStoreReviews(req, res) {
         },
       }
     )
-    res.status(200).send("Reviews fetched and sent successfully!")
+    res.status(200).send("Reviews fetched and sent successfully!!")
   } catch (error) {
     console.log("Error scraping reviews in Google Play:", error)
     res.status(500).send("Internal Server Error")
