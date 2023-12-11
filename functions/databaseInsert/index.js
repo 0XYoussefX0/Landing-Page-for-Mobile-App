@@ -1,48 +1,67 @@
 const mysql = require("mysql2")
+const fs = require("fs")
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "review_data",
-})
+// export async function insertReviewDataIntoMySQL(req, res) {
+//   const databaseCredentials = {
+//     databaseHost: null,
+//     databaseUser: null,
+//     databasePassword: null,
+//   }
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL database", err)
-    return
-  }
-  console.log("Connected to MySQL database")
-})
+//   const secretsPaths = ["", "", ""]
 
-function removeDuplicates(array) {
-  return Array.from(new Set(array.map(JSON.stringify))).map(JSON.parse)
-}
+//   for(let i = 0; i < secretsPaths.length; i++) {
+//     fs.readFile(secretsPaths[i], "utf8", (err, data) => {
+//       if(err) {
+//         console.error(err)
+//         res.status(500).send("Error")
+//       }
+//       databaseCredentials.
+//     })
+//   }
 
-async function insertReviewDataIntoMySQL() {
-  const playStoreReviews = await fetchPlayStoreReviews()
+//   const connection = mysql.createConnection({
+//     host: databaseCredentials.databaseHost,
+//     user: databaseCredentials.databaseUser,
+//     password: databaseCredentials.databasePassword,
+//     database: "appreviews",
+//   })
 
-  const values = appReviews.map((review) => {
-    return [
-      review.reviewId,
-      review.userName,
-      review.reviewDate,
-      review.reviewScore,
-      review.reviewText,
-      review.postedOn,
-    ]
-  })
+//   connection.connect((err) => {
+//     if (err) {
+//       console.error("Error connecting to MySQL database", err)
+//       return
+//     }
+//     console.log("Connected to MySQL database")
+//   })
 
-  try {
-    const query = `
-      INSERT IGNORE INTO reviews (reviewId, userName, reviewDate, reviewScore, reviewText, postedOn)
-      VALUES ?
-  `
-    connection.query(query, [values])
-    console.log("Data inserted successfully")
-  } catch (err) {
-    console.error("Error inserting data : ", err)
-  } finally {
-    connection.end()
-  }
+//   const playStoreReviews = JSON.parse(req.body)
+
+//   const values = playStoreReviews.map((review) => {
+//     return [
+//       review.reviewId,
+//       review.userName,
+//       review.reviewDate,
+//       review.reviewScore,
+//       review.reviewText,
+//       review.postedOn,
+//     ]
+//   })
+
+//   try {
+//     const query = `
+//       INSERT IGNORE INTO reviews (reviewId, userName, reviewDate, reviewScore, reviewText, postedOn)
+//       VALUES ?
+//   `
+//     connection.query(query, [values])
+//     console.log("Data inserted successfully")
+//   } catch (err) {
+//     console.error("Error inserting data : ", err)
+//   } finally {
+//     connection.end()
+//   }
+// }
+
+export async function insertReviewDataIntoMySQL(req, res) {
+  res.status(200).send("Hello World !!")
 }
