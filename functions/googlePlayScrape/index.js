@@ -27,11 +27,11 @@ export async function fetchPlayStoreReviews(req, res) {
       }
     })
 
-    await axios.post("secondFunctionUrl", JSON.stringify(reviews), {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    // await axios.post("secondFunctionUrl", JSON.stringify(reviews), {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
     res.status(200).send("Reviews fetched and sent successfully!")
   } catch (error) {
     console.log("Error scraping reviews in Google Play:", error)
