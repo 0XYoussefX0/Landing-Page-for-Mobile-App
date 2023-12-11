@@ -57,6 +57,8 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
   } catch (err) {
     console.error("Error inserting data : ", err)
   } finally {
-    connection.end()
+    if (connection) {
+      connection.end()
+    }
   }
 }
