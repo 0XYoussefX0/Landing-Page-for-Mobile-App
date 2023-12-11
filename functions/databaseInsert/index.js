@@ -1,7 +1,7 @@
 const mysql = require("mysql2")
 const fs = require("fs")
 
-// export async function insertReviewDataIntoMySQL(req, res) {
+//async function insertReviewDataIntoMySQL(req, res) {
 //   const databaseCredentials = {
 //     databaseHost: null,
 //     databaseUser: null,
@@ -62,6 +62,8 @@ const fs = require("fs")
 //   }
 // }
 
-export async function insertReviewDataIntoMySQL(req, res) {
+async function insertReviewDataIntoMySQL(req, res) {
   res.status(200).send("Hello World !!")
 }
+
+module.exports = insertReviewDataIntoMySQL
