@@ -1,13 +1,14 @@
 import gplay from "google-play-scraper"
 import axios from "axios"
 export async function fetchPlayStoreReviews(req, res) {
+  let reviews
   try {
     const response = await gplay.reviews({
       appId: "com.quranly.app",
       sort: gplay.sort.RECENT,
       num: 2000,
     })
-    const reviews = response.data.map((review) => {
+    reviews = response.data.map((review) => {
       const {
         id: reviewId,
         userName,
@@ -26,7 +27,14 @@ export async function fetchPlayStoreReviews(req, res) {
         postedOn,
       }
     })
+  } catch (err) {
+    console.log("Error scraping reviews in Google Play:", error)
+    res.status(500).send("Internal Server Error")
+  }
 
+  console.log(reviews[0])
+
+  try {
     await axios.post(
       "https://us-central1-striking-berm-340417.cloudfunctions.net/insertReviewDataIntoMySQL",
       JSON.stringify(reviews),
@@ -36,9 +44,9 @@ export async function fetchPlayStoreReviews(req, res) {
         },
       }
     )
-    res.status(200).send("Reviews fetched and sent successfully!!")
+    res.status(200).send("Reviews sent successfully!!")
   } catch (error) {
-    console.log("Error scraping reviews in Google Play:", error)
+    console.log("Error sending Data", error)
     res.status(500).send("Internal Server Error")
   }
 }
