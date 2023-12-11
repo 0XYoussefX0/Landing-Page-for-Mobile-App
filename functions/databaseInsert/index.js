@@ -12,6 +12,7 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     "/secret2/database-password",
     "/secret3/database-user",
   ]
+  let connection
   try {
     for (let i = 0; i < secretsPaths.length; i++) {
       const data = await fs.readFile(secretsPaths[i], "utf8")
@@ -23,7 +24,7 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
         databaseCredentials.databaseUser = data
       }
     }
-    const connection = mysql.createConnection({
+    connection = mysql.createConnection({
       host: databaseCredentials.databaseHost,
       user: databaseCredentials.databaseUser,
       password: databaseCredentials.databasePassword,
