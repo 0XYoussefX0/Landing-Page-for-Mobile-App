@@ -19,13 +19,17 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     if (i == 0) {
       databaseCredentials.databaseHost = data
     } else if (i == 1) {
-      databaseCredentials.databaseUser = data
-    } else if (i == 2) {
       databaseCredentials.databasePassword = data
+    } else if (i == 2) {
+      databaseCredentials.databaseUser = data
     }
   }
 
-  console.log(databaseCredentials)
+  if (req.body) {
+    res.status(200).send(databaseCredentials, "reviews:", req.body)
+  } else {
+    res.status(200).send(databaseCredentials)
+  }
 
   //   const connection = mysql.createConnection({
   //     host: databaseCredentials.databaseHost,
