@@ -62,7 +62,7 @@ const fs = require("fs")
 //   }
 // }
 
-async function insertReviewDataIntoMySQL(req, res) {
+function insertReviewDataIntoMySQL(req, res) {
   res.status(200).send("Hello World !!")
 }
 
