@@ -31,7 +31,7 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     //   database: "appreviews",
     // })
     connection = mysql.createConnection(
-      'mysql://cn1j52jnm34t1wblksok:pscale_pw_D9oQ4viPuBIE5gzJ6zxtSiixGx6Sw2B3CX1HButkTq1@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":false}'
+      'mysql://cn1j52jnm34t1wblksok:pscale_pw_D9oQ4viPuBIE5gzJ6zxtSiixGx6Sw2B3CX1HButkTq1@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":true}'
     )
     connection.connect((err) => {
       if (err) {
