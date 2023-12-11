@@ -2,6 +2,7 @@ const mysql = require("mysql2")
 const fs = require("fs").promises
 
 exports.insertReviewDataIntoMySQL = async (req, res) => {
+  console.log(req.body)
   res.status(200).send(req.body)
   // const databaseCredentials = {
   //   databaseHost: null,
