@@ -41,23 +41,23 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
       }
       console.log("Connected to MySQL database")
     })
-    const playStoreReviews = req.body
-    const values = playStoreReviews.map((review) => {
-      return [
-        review.reviewId,
-        review.userName,
-        review.reviewDate,
-        review.reviewScore,
-        review.reviewText,
-        review.postedOn,
-      ]
-    })
-    const query = `
-      INSERT IGNORE INTO reviews (reviewId, userName, reviewDate, reviewScore, reviewText, postedOn)
-      VALUES ?
-  `
-    connection.query(query, [values])
-    console.log("Data inserted successfully")
+    //   const playStoreReviews = req.body
+    //   const values = playStoreReviews.map((review) => {
+    //     return [
+    //       review.reviewId,
+    //       review.userName,
+    //       review.reviewDate,
+    //       review.reviewScore,
+    //       review.reviewText,
+    //       review.postedOn,
+    //     ]
+    //   })
+    //   const query = `
+    //     INSERT IGNORE INTO reviews (reviewId, userName, reviewDate, reviewScore, reviewText, postedOn)
+    //     VALUES ?
+    // `
+    //   connection.query(query, [values])
+    //   console.log("Data inserted successfully")
   } catch (err) {
     console.error("Error inserting data : ", err)
   } finally {
