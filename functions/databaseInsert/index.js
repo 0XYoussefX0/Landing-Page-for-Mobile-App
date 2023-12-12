@@ -30,10 +30,9 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     //   password: databaseCredentials.databasePassword,
     //   database: "appreviews",
     // })
-    /*it worked when you have changed the credentials somehow*/
-    connection = mysql.createConnection(
-      'mysql://aq0ernmeknsmho407np8:pscale_pw_fGB9X1kxb4ynuUDgfKJdDEkCLYBnt1gWV2W81DhIjoM@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":true}'
-    )
+    const databaseUrl = await fs.readFile("/secret4/database-url", "utf-8")
+    console.log(databaseUrl)
+    connection = mysql.createConnection(databaseUrl)
     connection.connect((err) => {
       if (err) {
         console.error("Error connecting to MySQL database", err)
