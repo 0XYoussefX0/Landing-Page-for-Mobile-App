@@ -3,7 +3,7 @@ const mysql = require("mysql2")
 // const cors = require("cors")
 /*const MailerLite = require('@mailerlite/mailerlite-nodejs').default;*/
 
-app = express()
+const app = express()
 
 // app.use(cors())
 app.use(express.json())
