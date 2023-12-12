@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 let connection
 async function connectionToTheDatabase() {
-  const databaseUrl = await fs.readFile("/secret4/database-url", "utf-8")
+  const databaseUrl = await fs.readFile("/secret5/database-url", "utf-8")
   console.log(databaseUrl)
   connection = mysql.createConnection(databaseUrl)
   connection.connect((err) => {
