@@ -32,7 +32,7 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     // })
     /*it worked when you have changed the credentials somehow*/
     connection = mysql.createConnection(
-      'mysql://klnxupwhzgdk2gilyg32:pscale_pw_P6rMIyLH9J3jp7UEK0pXyI6FnsTz24oqhgB4ZHqf05w@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":true}'
+      'mysql://aq0ernmeknsmho407np8:pscale_pw_fGB9X1kxb4ynuUDgfKJdDEkCLYBnt1gWV2W81DhIjoM@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":true}'
     )
     connection.connect((err) => {
       if (err) {
@@ -58,8 +58,10 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     // `
     //   connection.query(query, [values])
     //   console.log("Data inserted successfully")
+    res.status(200).send("ayo")
   } catch (err) {
     console.error("Error inserting data : ", err)
+    res.status(500).send("FULLA!!!")
   } finally {
     if (connection) {
       connection.end()
