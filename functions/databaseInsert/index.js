@@ -30,8 +30,9 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     //   password: databaseCredentials.databasePassword,
     //   database: "appreviews",
     // })
+    /*it worked when you have changed the credentials somehow*/
     connection = mysql.createConnection(
-      'mysql://f2jkc8ir0jod9n9x89ul:pscale_pw_jXYqE7AuVkwzwWbsypBGWtBxf9lefAnql6je7fmU1KT@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":true}'
+      'mysql://6v9r6ts1sajm1a3sc09n:pscale_pw_4guGBNjJMcoMGbDdx5r1OVd5EF3a1EQHmnFk9ewuDMn@aws.connect.psdb.cloud/appreviews?ssl={"rejectUnauthorized":true}'
     )
     connection.connect((err) => {
       if (err) {
