@@ -7,17 +7,21 @@ const app = express()
 
 // app.use(cors())
 app.use(express.json())
+let connection
+async function connectionToTheDatabase() {
+  const databaseUrl = await fs.readFile("/secret4/database-url", "utf-8")
+  console.log(databaseUrl)
+  connection = mysql.createConnection(databaseUrl)
+  connection.connect((err) => {
+    if (err) {
+      console.error("Error connecting to MySQL database", err)
+      return
+    }
+    console.log("Connected to MySQL database")
+  })
+}
 
-const databaseUrl = await fs.readFile("/secret4/database-url", "utf-8")
-console.log(databaseUrl)
-connection = mysql.createConnection(databaseUrl)
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL database", err)
-    return
-  }
-  console.log("Connected to MySQL database")
-})
+connectionToTheDatabase()
 
 app.get("/fiveStars/:lastId", (req, res) => {
   const lastId = parseInt(req.params.lastId)
