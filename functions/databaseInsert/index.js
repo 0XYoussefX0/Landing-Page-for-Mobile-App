@@ -30,16 +30,16 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
     //   password: databaseCredentials.databasePassword,
     //   database: "appreviews",
     // })
-    // const databaseUrl = await fs.readFile("/secret4/database-url", "utf-8")
-    // console.log(databaseUrl)
-    // connection = mysql.createConnection()
-    // connection.connect((err) => {
-    //   if (err) {
-    //     console.error("Error connecting to MySQL database", err)
-    //     return
-    //   }
-    //   console.log("Connected to MySQL database")
-    // })
+    const databaseUrl = await fs.readFile("/secret4/database-url", "utf-8")
+    console.log(databaseUrl)
+    connection = mysql.createConnection(databaseUrl)
+    connection.connect((err) => {
+      if (err) {
+        console.error("Error connecting to MySQL database", err)
+        return
+      }
+      console.log("Connected to MySQL database")
+    })
     //   const playStoreReviews = req.body
     //   const values = playStoreReviews.map((review) => {
     //     return [
