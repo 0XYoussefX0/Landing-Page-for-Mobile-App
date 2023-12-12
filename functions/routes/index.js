@@ -25,25 +25,25 @@ async function connectionToTheDatabase() {
 connectionToTheDatabase()
 
 app.get("/fiveStars/:lastId", (req, res) => {
-  res.status(200).send("five stars")
-  // const lastId = parseInt(req.params.lastId)
-  // connection.query(
-  //   `SELECT * FROM appreviews WHERE reviewScore = 5 and id > ${lastId} ORDER BY id LIMIT 10`,
-  //   (err, results) => {
-  //     if (err) {
-  //       console.error("Error executing query :", err)
-  //       return res.status(500).json({ error: "Database error" })
-  //     }
-  //     // // Set the CORS headers
-  //     // res.setHeader("Access-Control-Allow-Origin", "*")
-  //     // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-  //     // res.setHeader(
-  //     //   "Access-Control-Allow-Headers",
-  //     //   "Origin, X-Requested-With, Content-Type, Accept"
-  //     // )
-  //     res.json(results)
-  //   }
-  // )
+  // res.status(200).send("five stars")
+  const lastId = parseInt(req.params.lastId)
+  connection.query(
+    `SELECT * FROM appreviews WHERE reviewScore = 5 and id > ${lastId} ORDER BY id LIMIT 10`,
+    (err, results) => {
+      if (err) {
+        console.error("Error executing query :", err)
+        return res.status(500).json({ error: "Database error" })
+      }
+      // // Set the CORS headers
+      // res.setHeader("Access-Control-Allow-Origin", "*")
+      // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+      // res.setHeader(
+      //   "Access-Control-Allow-Headers",
+      //   "Origin, X-Requested-With, Content-Type, Accept"
+      // )
+      res.json(results)
+    }
+  )
 })
 
 app.get("/fourStars/:lastId", (req, res) => {
