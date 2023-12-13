@@ -58,7 +58,7 @@ function testimonialReviews() {
       ([key, value]) => value === true
     )[0]
     const response = await fetch(
-      `http://localhost:8000/${checkedProperty}/${lastId}`
+      `https://us-central1-striking-berm-340417.cloudfunctions.net/api/${checkedProperty}/${lastId}`
     )
     const data = await response.json()
 
