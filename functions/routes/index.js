@@ -33,14 +33,7 @@ app.get("/fiveStars/:lastId", (req, res) => {
         console.error("Error executing query :", err)
         return res.status(500).json({ error: "Database error" })
       }
-      // // Set the CORS headers
-      // res.setHeader("Access-Control-Allow-Origin", "*")
-      // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-      // res.setHeader(
-      //   "Access-Control-Allow-Headers",
-      //   "Origin, X-Requested-With, Content-Type, Accept"
-      // )
-      res.json(results)
+      res.status(200).json(results)
     }
   )
 })
@@ -54,14 +47,7 @@ app.get("/fourStars/:lastId", (req, res) => {
         console.error("Error executing query :", err)
         return res.status(500).json({ error: "Database error" })
       }
-      // // Set the CORS headers
-      // res.setHeader("Access-Control-Allow-Origin", "*")
-      // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-      // res.setHeader(
-      //   "Access-Control-Allow-Headers",
-      //   "Origin, X-Requested-With, Content-Type, Accept"
-      // )
-      res.json(results)
+      res.status(200).json(results)
     }
   )
 })
@@ -75,14 +61,7 @@ app.get("/threeStars/:lastId", (req, res) => {
         console.error("Error executing query :", err)
         return res.status(500).json({ error: "Database error" })
       }
-      // // Set the CORS headers
-      // res.setHeader("Access-Control-Allow-Origin", "*")
-      // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-      // res.setHeader(
-      //   "Access-Control-Allow-Headers",
-      //   "Origin, X-Requested-With, Content-Type, Accept"
-      // )
-      res.json(results)
+      res.status(200).json(results)
     }
   )
 })
@@ -96,14 +75,7 @@ app.get("/twoStars/:lastId", (req, res) => {
         console.error("Error executing query :", err)
         return res.status(500).json({ error: "Database error" })
       }
-      // // Set the CORS headers
-      // res.setHeader("Access-Control-Allow-Origin", "*")
-      // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-      // res.setHeader(
-      //   "Access-Control-Allow-Headers",
-      //   "Origin, X-Requested-With, Content-Type, Accept"
-      // )
-      res.json(results)
+      res.status(200).json(results)
     }
   )
 })
@@ -117,14 +89,7 @@ app.get("/oneStar/:lastId", (req, res) => {
         console.error("Error executing query :", err)
         return res.status(500).json({ error: "Database error" })
       }
-      // // Set the CORS headers
-      // res.setHeader("Access-Control-Allow-Origin", "*")
-      // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-      // res.setHeader(
-      //   "Access-Control-Allow-Headers",
-      //   "Origin, X-Requested-With, Content-Type, Accept"
-      // )
-      res.json(results)
+      res.status(200).json(results)
     }
   )
 })
@@ -145,7 +110,4 @@ app.post("/subscribe", (req, res) => {
     });
 })
 */
-// app.listen("8000", () => {
-//   console.log("listenning in port 8000")
-// })
 exports.api = app
