@@ -29,7 +29,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][Demo]](https://example.com)
+![Landing-Page-for-Mobile-App](https://github.com/0XYoussefX0/Landing-Page-for-Mobile-App/assets/151054138/e084a4a4-63f9-4f52-beec-667caae0bb5b)
 
 A great Landing page for a mobile app, that describes its features, shows user testimonials and offers subscribing to the app's newsletter
 
@@ -108,7 +108,6 @@ Project Link: [https://landing-page-for-mobile-app.pages.dev/](https://landing-p
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Demo]: images/screenshot.png
 [Html]: https://img.shields.io/badge/HTML-000000?style=for-the-badge&logo=html5
 [Html-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
 [Css]: https://img.shields.io/badge/CSS-000000?style=for-the-badge&logo=css3&logoColor=%231572B6
