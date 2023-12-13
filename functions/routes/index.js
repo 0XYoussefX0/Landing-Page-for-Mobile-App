@@ -1,12 +1,12 @@
 const express = require("express")
 const mysql = require("mysql2")
 const fs = require("fs").promises
-// const cors = require("cors")
+const cors = require("cors")
 /*const MailerLite = require('@mailerlite/mailerlite-nodejs').default;*/
 
 const app = express()
 
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 let connection
 async function connectionToTheDatabase() {
