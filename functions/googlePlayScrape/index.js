@@ -32,8 +32,6 @@ export async function fetchPlayStoreReviews(req, res) {
     res.status(500).send("Internal Server Error")
   }
 
-  console.log(reviews[0])
-
   try {
     await axios.post(
       "https://us-central1-striking-berm-340417.cloudfunctions.net/insertReviewDataIntoMySQL",

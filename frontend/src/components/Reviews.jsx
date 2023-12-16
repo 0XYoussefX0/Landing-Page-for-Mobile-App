@@ -6,7 +6,6 @@ import AutoSizer from "react-virtualized-auto-sizer"
 import InfiniteLoader from "react-window-infinite-loader"
 import Loader from "./Loader.jsx"
 
-/*use preact/compact*/
 function testimonialReviews() {
   const [dataTest, setDataTest] = useState([])
 

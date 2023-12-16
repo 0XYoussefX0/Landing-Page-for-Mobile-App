@@ -30,11 +30,10 @@ exports.insertReviewDataIntoMySQL = async (req, res) => {
         VALUES ?
     `
     connection.query(query, [values])
-    console.log("Data inserted successfully")
-    res.status(200).send("ayo")
+    res.status(200).send("Data inserted successfully")
   } catch (err) {
     console.error("Error inserting data : ", err)
-    res.status(500).send("FULLA!!!")
+    res.status(500).send("Error inserting data")
   } finally {
     if (connection) {
       connection.end()
