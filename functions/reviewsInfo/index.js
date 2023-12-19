@@ -10,6 +10,9 @@ export async function getAppInfo(req, res) {
       ratings,
       histogram,
     }
+    res.set("Access-Control-Allow-Origin", "*")
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS")
+    res.set("Access-Control-Allow-Headers", "Content-Type")
     res.status(200).json(reviewsInfo)
   } catch (err) {
     console.log("Error getting reviews info in Google Play:", err)

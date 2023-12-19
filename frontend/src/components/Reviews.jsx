@@ -8,6 +8,7 @@ import Loader from "./Loader.jsx"
 
 function testimonialReviews() {
   const [dataTest, setDataTest] = useState([])
+  const [reviewsInfo, setReviewsInfo] = useState({})
 
   const [moreItemsLoading, setMoreItemsLoading] = useState(false)
   const [hasNextPage, setHasNextPage] = useState(true)
@@ -36,6 +37,13 @@ function testimonialReviews() {
     }
     hasMountedRef.current = true
   }, [filterOptions])
+
+  useEffect(() => {
+    fetch(
+      "https://us-central1-striking-berm-340417.cloudfunctions.net/getAppInfo"
+    ).then((data) => setReviewsInfo(data))
+  }, [])
+  console.log(reviewsInfo)
 
   const handleFiltering = (clickedFilter) => {
     setFilterOptions((prevFilterOptions) => {
