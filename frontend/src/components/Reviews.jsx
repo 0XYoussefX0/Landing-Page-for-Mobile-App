@@ -6,9 +6,11 @@ import AutoSizer from "react-virtualized-auto-sizer"
 import InfiniteLoader from "react-window-infinite-loader"
 import Loader from "./Loader.jsx"
 
+import StarRating from "./StarRating.jsx"
+
 function testimonialReviews() {
   const [dataTest, setDataTest] = useState([])
-  const [reviewsInfo, setReviewsInfo] = useState({})
+  const [reviewsInfo, setReviewsInfo] = useState()
 
   const [moreItemsLoading, setMoreItemsLoading] = useState(false)
   const [hasNextPage, setHasNextPage] = useState(true)
@@ -41,8 +43,11 @@ function testimonialReviews() {
   useEffect(() => {
     fetch(
       "https://us-central1-striking-berm-340417.cloudfunctions.net/getAppInfo"
-    ).then((data) => setReviewsInfo(data))
+    )
+      .then((response) => response.json())
+      .then((data) => setReviewsInfo(data))
   }, [])
+
   console.log(reviewsInfo)
 
   const handleFiltering = (clickedFilter) => {
@@ -83,7 +88,14 @@ function testimonialReviews() {
   function getRowHeight(index) {
     return rowHeights.current[index] + 26 || 313
   }
-  console.log(dataTest)
+
+  const reviewsPercentage = (starCount) => {
+    return (
+      Math.round(
+        (reviewsInfo?.histogram[starCount] / reviewsInfo?.ratings) * 100
+      ) + "%"
+    )
+  }
   return (
     <>
       <h2 className="testimonialTitle">
@@ -97,19 +109,23 @@ function testimonialReviews() {
             <div className="sideTitle">Reviews</div>
             <div className="starRatingContainer">
               <div>
-                <img
+                <StarRating score={reviewsInfo?.score} />
+                {/* <img
                   src={stars.src}
                   width="206"
                   height="33"
                   style={{ maxWidth: "100%" }}
                   alt="Image showing Quranly app's average star rating on app stores"
-                />
+                /> */}
               </div>
-              <div className="averageRating">4.5 out of 5</div>
+              <div className="averageRating">
+                {reviewsInfo && reviewsInfo.score.toFixed(1) + " out of 5"}
+              </div>
             </div>
             <div className="totalCustomerRatings">
-              {/*change this to a dynamic number */}
-              5000+ customer ratings
+              {reviewsInfo &&
+                Math.floor(reviewsInfo.ratings / 1000) * 1000 +
+                  "+ customer ratings"}
             </div>
             <div className="ratingDistributionContainer">
               <div
@@ -123,11 +139,13 @@ function testimonialReviews() {
                   <div
                     className="ratingInnerDiv"
                     style={{
-                      width: "81%",
+                      width: reviewsPercentage(5),
                     }}
                   ></div>
                 </div>
-                <div className="ratingPercentage">81 %</div>
+                <div className="ratingPercentage">
+                  {reviewsInfo && reviewsPercentage(5)}
+                </div>
               </div>
               <div
                 onClick={() => {
@@ -140,11 +158,13 @@ function testimonialReviews() {
                   <div
                     className="ratingInnerDiv"
                     style={{
-                      width: "4%",
+                      width: reviewsPercentage(4),
                     }}
                   ></div>
                 </div>
-                <div className="ratingPercentage">4 %</div>
+                <div className="ratingPercentage">
+                  {reviewsInfo && reviewsPercentage(4)}
+                </div>
               </div>
               <div
                 onClick={() => {
@@ -157,11 +177,13 @@ function testimonialReviews() {
                   <div
                     className="ratingInnerDiv"
                     style={{
-                      width: "3%",
+                      width: reviewsPercentage(3),
                     }}
                   ></div>
                 </div>
-                <div className="ratingPercentage">3 %</div>
+                <div className="ratingPercentage">
+                  {reviewsInfo && reviewsPercentage(3)}
+                </div>
               </div>
               <div
                 onClick={() => {
@@ -174,11 +196,13 @@ function testimonialReviews() {
                   <div
                     className="ratingInnerDiv"
                     style={{
-                      width: "5%",
+                      width: reviewsPercentage(2),
                     }}
                   ></div>
                 </div>
-                <div className="ratingPercentage">5 %</div>
+                <div className="ratingPercentage">
+                  {reviewsInfo && reviewsPercentage(2)}
+                </div>
               </div>
               <div
                 onClick={() => {
@@ -191,11 +215,13 @@ function testimonialReviews() {
                   <div
                     className="ratingInnerDiv"
                     style={{
-                      width: "5%",
+                      width: reviewsPercentage(1),
                     }}
                   ></div>
                 </div>
-                <div className="ratingPercentage">5 %</div>
+                <div className="ratingPercentage">
+                  {reviewsInfo && reviewsPercentage(1)}
+                </div>
               </div>
             </div>
             <div className="radio-buttons-ratingDistributionContainer">

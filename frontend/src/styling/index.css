@@ -711,6 +711,10 @@ h2 {
   margin-top: 16px;
   border: 1px solid #dfe1e4;
 }
+.starRatingContainer > div:nth-child(1) {
+  display: flex;
+  gap: 12px;
+}
 .platformLabel {
   color: #545454;
 }
