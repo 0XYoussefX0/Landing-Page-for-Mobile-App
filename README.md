@@ -11,15 +11,7 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#running">Running</a></li>
+    </li>    
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -53,46 +45,6 @@ A great Landing page for a mobile app, that describes its features, shows user t
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple simple steps.
-
-### Prerequisites
-
-* NodeJs : [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/0XYoussefX0/Landing-Page-for-Mobile-App.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-## Running
-
-Development environment : 
-  ```sh
-  npm run dev
-  ```
-Production environment : 
- ```sh
-   npm run build
-   ```
-```sh
-   npm start
-   ```
 
 <!-- CONTACT -->
 ## Contact
