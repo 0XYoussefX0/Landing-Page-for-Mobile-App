@@ -19,8 +19,8 @@ function ReviewCard(props) {
     }
   }, [rowRef])
 
-  if (props.dataTest?.reviewDate) {
-    const reviewDate = new Date(props.dataTest?.reviewDate)
+  if (props.dataTest?.review_date) {
+    const reviewDate = new Date(props.dataTest?.review_date)
 
     const options = { month: "long", day: "2-digit", year: "numeric" }
 
@@ -35,16 +35,16 @@ function ReviewCard(props) {
         <div style={props.style}>
           <div className="reviewCard" ref={rowRef}>
             <div className="reviewCardFlexContainer">
-              <div className="reviewerName">{props.dataTest?.userName}</div>
+              <div className="reviewerName">{props.dataTest?.user_name}</div>
               <div className="reviewDate">
-                {props.dataTest?.reviewDate
+                {props.dataTest?.review_date
                   ? formattedDate
                   : "Review date unknown"}
               </div>
             </div>
             <div className="starRatingContainer2">
               {Array.from(
-                { length: props.dataTest?.reviewScore },
+                { length: props.dataTest?.review_score },
                 (_, index) => (
                   <img
                     key={index}
@@ -54,7 +54,7 @@ function ReviewCard(props) {
                 )
               )}
               {Array.from(
-                { length: 5 - props.dataTest?.reviewScore },
+                { length: 5 - props.dataTest?.review_score },
                 (_, index) => (
                   <img
                     key={index}
@@ -65,11 +65,11 @@ function ReviewCard(props) {
               )}
             </div>
             <div>
-              <p className="reviewContent">{props.dataTest?.reviewText}</p>
+              <p className="reviewContent">{props.dataTest?.review_text}</p>
               <div className="platformInfoContainer">
                 <div className="platformLabel">Posted on</div>
                 <div>
-                  {props.dataTest?.postedOn === "playStore" ? (
+                  {props.dataTest?.posted_on === "playStore" ? (
                     <picture>
                       <source srcSet={p_iconWebp.src} type="image/webp" />
                       <img

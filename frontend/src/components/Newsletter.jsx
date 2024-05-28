@@ -17,11 +17,7 @@ function Newsletter() {
   }
   const handleEmailValidity = () => {
     const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$/
-    console.log(
-      regex.test(emailInput),
-      "checking if it is working or not",
-      emailInput
-    )
+
     if (regex.test(emailInput)) {
       setEmailIsValid(true)
     } else {

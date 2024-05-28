@@ -1,98 +1,44 @@
-const express = require("express")
-const mysql = require("mysql2")
-const fs = require("fs").promises
-const cors = require("cors")
+import { createClient } from "@supabase/supabase-js";
+
 /*const MailerLite = require('@mailerlite/mailerlite-nodejs').default;*/
 
-const app = express()
+const getScore = (scoreParam) => {
+  if (scoreParam === "fiveStars") {
+    return 5;
+  } else if (scoreParam === "fourStars") {
+    return 4;
+  } else if (scoreParam === "threeStars") {
+    return 3;
+  } else if (scoreParam === "twoStars") {
+    return 2;
+  } else if (scoreParam === "oneStar") {
+    return 1;
+  } else {
+    return 5;
+  }
+};
 
-app.use(cors())
-app.use(express.json())
-let connection
-async function connectionToTheDatabase() {
-  const databaseUrl = await fs.readFile("/secret5/database-url", "utf-8")
-  console.log(databaseUrl)
-  connection = mysql.createConnection(databaseUrl)
-  connection.connect((err) => {
-    if (err) {
-      console.error("Error connecting to MySQL database", err)
-      return
-    }
-    console.log("Connected to MySQL database")
-  })
+export async function getReviews(req, res) {
+  const score = getScore(req.query.score);
+  const lastId = req.query.lastId ?? 0;
+  const supabaseUrl = process.env.supabaseUrl;
+  const supabaseKey = process.env.supabaseKey;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  const { data, error } = await supabase
+    .from("appReviews")
+    .select("*")
+    .eq("review_score", score)
+    .gt("id", lastId)
+    .order("id", { ascending: true })
+    .limit(10);
+  if (error) {
+    return res.status(500).json({ error: "Database error" });
+  }
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.status(200).json(data);
 }
-
-connectionToTheDatabase()
-
-app.get("/fiveStars/:lastId", (req, res) => {
-  const lastId = parseInt(req.params.lastId)
-  connection.query(
-    `SELECT * FROM appreviews WHERE reviewScore = 5 and id > ${lastId} ORDER BY id LIMIT 10`,
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query :", err)
-        return res.status(500).json({ error: "Database error" })
-      }
-      res.status(200).json(results)
-    }
-  )
-})
-
-app.get("/fourStars/:lastId", (req, res) => {
-  const lastId = parseInt(req.params.lastId)
-  connection.query(
-    `SELECT * FROM appreviews WHERE reviewScore = 4 and id > ${lastId} ORDER BY id LIMIT 10 `,
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query :", err)
-        return res.status(500).json({ error: "Database error" })
-      }
-      res.status(200).json(results)
-    }
-  )
-})
-
-app.get("/threeStars/:lastId", (req, res) => {
-  const lastId = parseInt(req.params.lastId)
-  connection.query(
-    `SELECT * FROM appreviews WHERE reviewScore = 3 and id > ${lastId} ORDER BY id LIMIT 10 `,
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query :", err)
-        return res.status(500).json({ error: "Database error" })
-      }
-      res.status(200).json(results)
-    }
-  )
-})
-
-app.get("/twoStars/:lastId", (req, res) => {
-  const lastId = parseInt(req.params.lastId)
-  connection.query(
-    `SELECT * FROM appreviews WHERE reviewScore = 2 and id > ${lastId} ORDER BY id LIMIT 10 `,
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query :", err)
-        return res.status(500).json({ error: "Database error" })
-      }
-      res.status(200).json(results)
-    }
-  )
-})
-
-app.get("/oneStar/:lastId", (req, res) => {
-  const lastId = parseInt(req.params.lastId)
-  connection.query(
-    `SELECT * FROM appreviews WHERE reviewScore = 1 and id > ${lastId} ORDER BY id LIMIT 10 `,
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query :", err)
-        return res.status(500).json({ error: "Database error" })
-      }
-      res.status(200).json(results)
-    }
-  )
-})
 /*
 app.post("/subscribe", (req, res) => {
   const mailerlite = new MailerLite({
@@ -110,4 +56,3 @@ app.post("/subscribe", (req, res) => {
     });
 })
 */
-exports.api = app

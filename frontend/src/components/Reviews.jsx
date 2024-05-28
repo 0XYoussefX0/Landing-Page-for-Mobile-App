@@ -1,19 +1,19 @@
-import { useEffect, useState, useRef } from "react"
-import stars from "../assets/stars.png"
-import ReviewCard from "./ReviewCard"
-import { VariableSizeList as List } from "react-window"
-import AutoSizer from "react-virtualized-auto-sizer"
-import InfiniteLoader from "react-window-infinite-loader"
-import Loader from "./Loader.jsx"
+import { useEffect, useState, useRef } from "react";
+import stars from "../assets/stars.png";
+import ReviewCard from "./ReviewCard";
+import { VariableSizeList as List } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
+import InfiniteLoader from "react-window-infinite-loader";
+import Loader from "./Loader.jsx";
 
-import StarRating from "./StarRating.jsx"
+import StarRating from "./StarRating.jsx";
 
 function testimonialReviews() {
-  const [dataTest, setDataTest] = useState([])
-  const [reviewsInfo, setReviewsInfo] = useState()
+  const [dataTest, setDataTest] = useState([]);
+  const [reviewsInfo, setReviewsInfo] = useState();
 
-  const [moreItemsLoading, setMoreItemsLoading] = useState(false)
-  const [hasNextPage, setHasNextPage] = useState(true)
+  const [moreItemsLoading, setMoreItemsLoading] = useState(false);
+  const [hasNextPage, setHasNextPage] = useState(true);
 
   const [filterOptions, setFilterOptions] = useState({
     fiveStars: true,
@@ -21,72 +21,71 @@ function testimonialReviews() {
     threeStars: false,
     twoStars: false,
     oneStar: false,
-  })
+  });
 
-  const [lastId, setLastId] = useState(0)
+  const [lastId, setLastId] = useState(0);
 
-  const infiniteListRef = useRef(null)
-  const hasMountedRef = useRef(false)
+  const infiniteListRef = useRef(null);
+  const hasMountedRef = useRef(false);
 
-  const listRef = useRef(null)
-  const rowHeights = useRef({})
+  const listRef = useRef(null);
+  const rowHeights = useRef({});
 
   useEffect(() => {
     if (infiniteListRef.current && hasMountedRef.current) {
-      infiniteListRef.current.resetloadMoreItemsCache()
-      setDataTest([])
-      setLastId(0)
+      infiniteListRef.current.resetloadMoreItemsCache();
+      setDataTest([]);
+      setLastId(0);
     }
-    hasMountedRef.current = true
-  }, [filterOptions])
+    hasMountedRef.current = true;
+  }, [filterOptions]);
 
   useEffect(() => {
     fetch(
-      "https://us-central1-striking-berm-340417.cloudfunctions.net/getAppInfo"
+      "https://us-central1-cryptic-smile-407714.cloudfunctions.net/function-1"
     )
       .then((response) => response.json())
-      .then((data) => setReviewsInfo(data))
-  }, [])
-
-  console.log(reviewsInfo)
+      .then((data) => setReviewsInfo(data));
+  }, []);
 
   const handleFiltering = (clickedFilter) => {
     setFilterOptions((prevFilterOptions) => {
-      let newFilterOptions = { ...prevFilterOptions }
+      let newFilterOptions = { ...prevFilterOptions };
       Object.keys(newFilterOptions).forEach((key) => {
         if (key == clickedFilter) {
-          newFilterOptions[key] = true
+          newFilterOptions[key] = true;
         } else {
-          newFilterOptions[key] = false
+          newFilterOptions[key] = false;
         }
-      })
-      return newFilterOptions
-    })
-  }
+      });
+      return newFilterOptions;
+    });
+  };
 
   const loadMore = async () => {
-    setMoreItemsLoading(true)
+    setMoreItemsLoading(true);
     let checkedProperty = Object.entries(filterOptions).find(
       ([key, value]) => value === true
-    )[0]
+    )[0];
+
     const response = await fetch(
-      `https://us-central1-striking-berm-340417.cloudfunctions.net/api/${checkedProperty}/${lastId}`
-    )
-    const data = await response.json()
+      `https://us-central1-cryptic-smile-407714.cloudfunctions.net/function-3?score=${checkedProperty}&lastId=${lastId}`
+    );
+    const data = await response.json();
 
-    setMoreItemsLoading(false)
-    setDataTest((prevDataTest) => [...prevDataTest, ...data])
-    setLastId(data[data.length - 1].id)
-  }
+    setMoreItemsLoading(false);
+    setDataTest((prevDataTest) => [...prevDataTest, ...data]);
+    setLastId(data[data.length - 1].id);
+  };
 
-  const itemCount = hasNextPage ? dataTest.length + 1 : dataTest.length
+  const itemCount = hasNextPage ? dataTest.length + 1 : dataTest.length;
 
   function setRowHeight(index, size) {
-    listRef.current.resetAfterIndex(0)
-    rowHeights.current = { ...rowHeights.current, [index]: size }
+    listRef.current.resetAfterIndex(0);
+    rowHeights.current = { ...rowHeights.current, [index]: size };
   }
   function getRowHeight(index) {
-    return rowHeights.current[index] + 26 || 313
+    return rowHeights.current[index] + 26 || 313;
   }
 
   const reviewsPercentage = (starCount) => {
@@ -94,8 +93,8 @@ function testimonialReviews() {
       Math.round(
         (reviewsInfo?.histogram[starCount] / reviewsInfo?.ratings) * 100
       ) + "%"
-    )
-  }
+    );
+  };
   return (
     <>
       <h2 className="testimonialTitle">
@@ -130,7 +129,7 @@ function testimonialReviews() {
             <div className="ratingDistributionContainer">
               <div
                 onClick={() => {
-                  handleFiltering("fiveStars")
+                  handleFiltering("fiveStars");
                 }}
                 className="ratingClickable"
               >
@@ -149,7 +148,7 @@ function testimonialReviews() {
               </div>
               <div
                 onClick={() => {
-                  handleFiltering("fourStars")
+                  handleFiltering("fourStars");
                 }}
                 className="ratingClickable"
               >
@@ -168,7 +167,7 @@ function testimonialReviews() {
               </div>
               <div
                 onClick={() => {
-                  handleFiltering("threeStars")
+                  handleFiltering("threeStars");
                 }}
                 className="ratingClickable"
               >
@@ -187,7 +186,7 @@ function testimonialReviews() {
               </div>
               <div
                 onClick={() => {
-                  handleFiltering("twoStars")
+                  handleFiltering("twoStars");
                 }}
                 className="ratingClickable"
               >
@@ -206,7 +205,7 @@ function testimonialReviews() {
               </div>
               <div
                 onClick={() => {
-                  handleFiltering("oneStar")
+                  handleFiltering("oneStar");
                 }}
                 className="ratingClickable"
               >
@@ -297,8 +296,8 @@ function testimonialReviews() {
                       itemSize={getRowHeight}
                       onItemsRendered={onItemsRendered}
                       ref={(listInstance) => {
-                        ref(listInstance)
-                        listRef.current = listInstance
+                        ref(listInstance);
+                        listRef.current = listInstance;
                       }}
                       overscanCount={5}
                     >
@@ -320,7 +319,7 @@ function testimonialReviews() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default testimonialReviews
+export default testimonialReviews;
