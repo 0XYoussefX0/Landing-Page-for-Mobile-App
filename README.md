@@ -51,8 +51,6 @@ A great Landing page for a mobile app, that describes its features, shows user t
 
 Youssef Abelouas - [Linkedin](https://www.linkedin.com/) - youssef.abelouass@gmail.com
 
-Project Link: [https://landing-page-for-mobile-app.pages.dev/](https://landing-page-for-mobile-app.pages.dev/)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
